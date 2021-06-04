@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 1
       - name: Scan Django settings for security issues
         id: check
-        uses: victoriadrake/django-security-check@master
+        uses: mrustl/django-security-check@master
       - name: Upload output
         uses: actions/upload-artifact@v2
         with:
