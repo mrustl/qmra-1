@@ -1,0 +1,43 @@
+{% extends "qmratool/layout.html" %}
+
+{% block body %}
+
+<div class="container" style="padding: 5%">
+
+  <div class="row">
+    <div class="col-sm-8">
+    {% if user.is_authenticated %}
+    <h4 class= "mb-5">Risk assessments of {{user.username|capfirst}}</h4>
+  
+        {%for assessment in assessments%}
+              <div class="media px-3 mt-3">
+              <div class="media-left pr-3">
+                <a href="#">
+                  <img class= "img-fluid" src="/static/qmratool/placeholder2.png" alt="...">
+                </a>
+              </div>
+                 <div class="media-body">
+                  <h4 class="media-heading">{{assessment.name|title}}</h4>
+                   <p> {{assessment.description|capfirst}} <a class = "text_link_kwb font-italic" href="{% url "edit_assessment" assessment.id%}">Edit risk assessment</a></p>
+                   <a href= "{% url "results" assessment.id%}", class = "btn-sm btn-primary sm"> Show results </a>
+                </div>
+            </div>
+            
+        {%empty%}
+        There are currently no risk assessments. Click on <strong>Start new risk assessment </strong> to create your first risk assessment!
+
+        {%endfor%}
+
+  </div>
+
+  <div class="col-sm-3 offset-sm-1"> <!--style= "background-color: #007c9f; color: white">--> 
+    <h4 class= "mb-3">Options</h4>
+    <a class = "btn btn-primary mt-3" href="{%url 'new_assessment'%}">Start new risk assessment</a>
+    <a class = "btn btn-primary mt-3" href="{%url 'comparison'%}">Compare risk assessment</a>
+    
+  </div>
+{%endif%}
+
+
+{% endblock %}
+
